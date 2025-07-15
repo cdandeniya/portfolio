@@ -53,24 +53,25 @@ export default function Navigation() {
       transition={{ duration: 0.8 }}
       className="fixed top-0 left-0 right-0 z-40 bg-white/80 backdrop-blur-md border-b border-gray-200"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
+      <div className="max-w-7xl mx-auto px-8 sm:px-16 lg:px-24">
+        <div className="flex justify-between items-center h-20 md:h-24">
           <motion.div
             whileHover={{ scale: 1.05 }}
-            className="text-xl font-bold text-gray-900"
+            className="text-2xl md:text-3xl font-extrabold tracking-tight text-gray-900 pr-8 select-none cursor-pointer"
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           >
             CD
           </motion.div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex space-x-8">
+          <div className="hidden md:flex space-x-12">
             {navItems.map((item) => (
               <motion.button
                 key={item.name}
                 whileHover={{ y: -2 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => scrollToSection(item.href)}
-                className={`text-sm font-medium transition-colors duration-200 ${
+                className={`text-base font-semibold transition-colors duration-200 px-2 py-1 rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 bg-transparent ${
                   activeSection === item.name.toLowerCase()
                     ? 'text-blue-600'
                     : 'text-gray-600 hover:text-gray-900'
@@ -85,9 +86,9 @@ export default function Navigation() {
           <motion.button
             whileTap={{ scale: 0.95 }}
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden p-2"
+            className="md:hidden p-3 rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
           >
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
+            {isOpen ? <X size={28} /> : <Menu size={28} />}
           </motion.button>
         </div>
 
@@ -97,16 +98,16 @@ export default function Navigation() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="md:hidden py-4 border-t border-gray-200"
+            className="md:hidden py-6 border-t border-gray-200"
           >
-            <div className="flex flex-col space-y-4">
+            <div className="flex flex-col space-y-6">
               {navItems.map((item) => (
                 <motion.button
                   key={item.name}
                   whileHover={{ x: 10 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={() => scrollToSection(item.href)}
-                  className={`text-left text-sm font-medium transition-colors duration-200 ${
+                  className={`text-left text-lg font-semibold transition-colors duration-200 px-2 py-1 rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 bg-transparent ${
                     activeSection === item.name.toLowerCase()
                       ? 'text-blue-600'
                       : 'text-gray-600 hover:text-gray-900'

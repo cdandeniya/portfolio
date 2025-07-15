@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Github, Code, Database, Cpu } from 'lucide-react'
+import { Github, Code, Database, Cpu, Server } from 'lucide-react'
 
 const projects = [
   {
@@ -27,7 +27,7 @@ const projects = [
     ],
     technologies: ['Java', 'JavaScript', 'JDBC', 'MySQL', 'HTML'],
     github: 'https://github.com/cdandeniya/stock-trader.git',
-    icon: Database,
+    icon: Server,
     color: 'green'
   },
   {
@@ -80,7 +80,11 @@ export default function Projects() {
                   {/* Project Header */}
                   <div className="flex items-center mb-6">
                     <div className={`p-3 bg-${project.color}-600 rounded-lg mr-4`}>
-                      <IconComponent size={24} className="text-white" />
+                      {project.title === 'Online Stock Trading System' ? (
+                        <IconComponent size={24} className="text-green-800" />
+                      ) : (
+                        <IconComponent size={24} className="text-white" />
+                      )}
                     </div>
                     <h3 className="text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors duration-200">
                       {project.title}
