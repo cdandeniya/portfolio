@@ -1,80 +1,55 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Code, Server, Database, Cloud, TestTube, GitBranch } from 'lucide-react'
+import { Code, Server, Cloud, GitBranch, Award } from 'lucide-react'
 
 const skillCategories = [
   {
-    title: 'Programming Languages',
+    title: 'Languages & Frameworks',
     icon: Code,
     skills: [
       { name: 'Java', level: 95 },
       { name: 'Python', level: 90 },
-      { name: 'C/C++', level: 85 },
       { name: 'JavaScript/TypeScript', level: 95 },
-      { name: 'SQL', level: 90 }
+      { name: 'React/Next.js', level: 90 },
+      { name: 'Node.js', level: 90 }
     ],
     color: 'blue'
   },
   {
-    title: 'Frameworks & Libraries',
-    icon: Server,
-    skills: [
-      { name: 'React', level: 95 },
-      { name: 'Next.js', level: 90 },
-      { name: 'Node.js', level: 90 },
-      { name: 'Express', level: 85 },
-      { name: 'Redux Toolkit', level: 80 }
-    ],
-    color: 'green'
-  },
-  {
-    title: 'Cloud & Infrastructure',
+    title: 'Cloud & DevOps',
     icon: Cloud,
     skills: [
       { name: 'AWS', level: 90 },
-      { name: 'ECS', level: 85 },
-      { name: 'S3', level: 90 },
-      { name: 'DynamoDB', level: 85 },
-      { name: 'CI/CD', level: 90 }
+      { name: 'CI/CD', level: 90 },
+      { name: 'Docker', level: 85 },
+      { name: 'Linux', level: 85 }
     ],
-    color: 'orange'
+    color: 'amber'
   },
   {
-    title: 'Testing & Tools',
-    icon: TestTube,
-    skills: [
-      { name: 'JUnit', level: 90 },
-      { name: 'Mockito', level: 85 },
-      { name: 'Pytest', level: 80 },
-      { name: 'PyTorch', level: 75 },
-      { name: 'GitHub', level: 95 }
-    ],
-    color: 'purple'
-  },
-  {
-    title: 'Development Practices',
+    title: 'Practices & Tools',
     icon: GitBranch,
     skills: [
-      { name: 'Agile Development', level: 95 },
-      { name: 'SCRUM', level: 90 },
-      { name: 'Microservices', level: 90 },
-      { name: 'Unit Testing', level: 95 },
-      { name: 'Integration Testing', level: 90 }
-    ],
-    color: 'indigo'
-  },
-  {
-    title: 'Other Skills',
-    icon: Database,
-    skills: [
-      { name: 'Object-Oriented Programming', level: 95 },
-      { name: 'Back-end Development', level: 90 },
-      { name: 'Linux', level: 85 },
-      { name: 'Jira', level: 90 },
+      { name: 'Agile/SCRUM', level: 90 },
+      { name: 'Unit/Integration Testing', level: 90 },
+      { name: 'GitHub', level: 95 },
       { name: 'System Design', level: 85 }
     ],
-    color: 'teal'
+    color: 'purple'
+  }
+]
+
+const awards = [
+  {
+    name: "Baigent Memorial Scholarship",
+    years: "2024, 2025",
+    institution: "Stony Brook University"
+  },
+  {
+    name: "Dean's Merit Fund for Engineering",
+    years: "2024",
+    institution: "Stony Brook University"
   }
 ]
 
@@ -91,14 +66,18 @@ export default function Skills() {
         >
           <h2 className="text-4xl font-bold text-gray-900 mb-4">Skills & Expertise</h2>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            A comprehensive skill set spanning programming languages, frameworks, cloud infrastructure, 
-            and development practices.
+            Key skills in software engineering, cloud, and product development.
           </p>
         </motion.div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {skillCategories.map((category, categoryIndex) => {
             const IconComponent = category.icon
+            const colorClass = {
+              blue: 'bg-blue-600',
+              amber: 'bg-amber-600',
+              purple: 'bg-purple-600'
+            }[category.color] || 'bg-gray-400';
             return (
               <motion.div
                 key={category.title}
@@ -144,7 +123,7 @@ export default function Skills() {
                             whileInView={{ width: `${skill.level}%` }}
                             transition={{ duration: 1, delay: skillIndex * 0.1 }}
                             viewport={{ once: true }}
-                            className={`h-2 bg-${category.color}-600 rounded-full transition-all duration-300`}
+                            className={`h-2 ${colorClass} rounded-full transition-all duration-300`}
                           />
                         </div>
                       </motion.div>
@@ -156,7 +135,7 @@ export default function Skills() {
           })}
         </div>
 
-        {/* Additional Skills */}
+        {/* Honors & Awards */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -164,30 +143,22 @@ export default function Skills() {
           viewport={{ once: true }}
           className="mt-16 bg-white rounded-2xl p-8 shadow-lg"
         >
-          <h3 className="text-2xl font-bold text-gray-900 mb-6 text-center">
-            Additional Expertise
+          <h3 className="text-2xl font-bold text-gray-900 mb-6 text-center flex items-center justify-center gap-2">
+            <Award size={24} className="text-yellow-500" /> Honors & Awards
           </h3>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {[
-              'System Architecture',
-              'API Design',
-              'Performance Optimization',
-              'Security Best Practices',
-              'Database Design',
-              'DevOps',
-              'Code Review',
-              'Technical Leadership'
-            ].map((skill, index) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {awards.map((award, idx) => (
               <motion.div
-                key={skill}
+                key={award.name}
                 initial={{ opacity: 0, scale: 0.8 }}
                 whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
+                transition={{ duration: 0.5, delay: idx * 0.1 }}
                 viewport={{ once: true }}
-                whileHover={{ scale: 1.05 }}
-                className="text-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors duration-200"
+                className="flex flex-col items-start bg-gray-50 rounded-lg p-4 border border-gray-100"
               >
-                <span className="text-sm font-medium text-gray-700">{skill}</span>
+                <span className="text-lg font-semibold text-gray-800 mb-1">{award.name}</span>
+                <span className="text-sm text-gray-500 mb-1">{award.years}</span>
+                <span className="text-xs text-gray-400">{award.institution}</span>
               </motion.div>
             ))}
           </div>

@@ -5,54 +5,49 @@ import { Calendar, MapPin, ExternalLink } from 'lucide-react'
 
 const experiences = [
   {
+    company: 'Amazon',
+    companyUrl: 'https://amazon.com',
+    position: 'Junior Developer',
+    location: 'Manhattan, NY',
+    period: 'Oct 2021 - Oct 2024',
+    description: 'Built and optimized scalable billing systems, modernized legacy infrastructure, and improved reliability for high-volume transactions.',
+    achievements: [
+      'Processed 10M+ transactions monthly with reduced error rates',
+      'Migrated billing systems to AWS microservices',
+      'Enhanced API reliability and led code reviews'
+    ],
+    technologies: ['Java', 'AWS', 'ECS', 'S3', 'DynamoDB', 'JUnit'],
+    color: 'orange'
+  },
+  {
     company: 'OuterLabs Studio',
+    companyUrl: 'https://outerlabs.studio',
     position: 'Lead Solutions Architect',
     location: 'Brooklyn, NY',
     period: 'Aug 2023 - Jun 2025',
-    description: 'Expanded client portfolio by 30% through strategic acquisition plans, securing high-value accounts and fostering long-term partnerships.',
+    description: 'Led delivery of 15+ projects, designed scalable architectures, and managed cloud infrastructure for 15,000+ users.',
     achievements: [
-      'Delivered 15+ projects under tight deadlines, ensuring optimal quality and client satisfaction',
-      'Designed and built scalable front-end architectures using React, Next.js, and TypeScript',
-      'Architected robust backend solutions with Node.js and PostgreSQL, optimizing performance',
-      'Maintained on-premise and AWS Cloud server infrastructure for 15,000+ users',
-      'Integrated CI/CD pipelines with GitHub Actions to streamline deployments',
-      'Contributed to OuterLabs\' success, earning three industry awards and generating six-figure profits'
+      'Expanded client portfolio by 30%',
+      'Built scalable front-end and backend solutions',
+      'Integrated CI/CD pipelines and won industry awards'
     ],
-    technologies: ['React', 'Next.js', 'TypeScript', 'Node.js', 'PostgreSQL', 'AWS', 'GitHub Actions'],
+    technologies: ['React', 'Next.js', 'TypeScript', 'Node.js', 'PostgreSQL', 'AWS'],
     color: 'blue'
   },
   {
     company: 'Sai AI',
+    companyUrl: 'https://trysai.com/',
     position: 'Machine Learning Intern',
     location: 'Ithaca, NY',
     period: 'Aug 2024 - Dec 2024',
-    description: 'Assisted in fine-tuning 3B-parameter open-source language models, reducing validation perplexity by 9% versus the base model.',
+    description: 'Fine-tuned large language models and deployed fast inference services on AWS.',
     achievements: [
-      'Assisted in fine-tuning 3B-parameter open-source language models (Hugging Face Transformers & PyTorch Lightning)',
-      'Reduced validation perplexity by 9% versus the base model',
-      'Containerized and deployed a FastAPI inference service to AWS ECS with Docker',
-      'Achieved <500ms median latency at 10 QPS',
-      'Logged metrics with Weights & Biases, enabling the team to track 25+ training runs'
+      'Reduced model perplexity by 9%',
+      'Deployed FastAPI inference to AWS ECS',
+      'Logged and tracked 25+ training runs'
     ],
-    technologies: ['Python', 'PyTorch', 'Hugging Face', 'FastAPI', 'Docker', 'AWS ECS', 'Weights & Biases'],
+    technologies: ['Python', 'PyTorch', 'Hugging Face', 'FastAPI', 'Docker'],
     color: 'purple'
-  },
-  {
-    company: 'Amazon',
-    position: 'Junior Developer',
-    location: 'Manhattan, NY',
-    period: 'Oct 2021 - Oct 2024',
-    description: 'Designed and implemented a scalable billing system processing 10M+ transactions monthly, reducing error rates by 35%.',
-    achievements: [
-      'Designed and implemented a scalable billing system processing 10M+ transactions monthly',
-      'Optimized RESTful payment execution APIs to decrease latency for advertisers',
-      'Spearheaded migration of legacy billing systems to microservices architecture on AWS',
-      'Improved maintainability and reduced downtime by 45% through system modernization',
-      'Enhanced API reliability by designing and executing 150+ unit and integration tests',
-      'Collaborated with cross-functional teams of 12 developers and performed 30+ code reviews'
-    ],
-    technologies: ['Java', 'AWS', 'ECS', 'S3', 'DynamoDB', 'JUnit', 'Mockito', 'Pytest', 'Microservices'],
-    color: 'orange'
   }
 ]
 
@@ -104,7 +99,14 @@ export default function Experience() {
                           {exp.position}
                         </h3>
                         <div className="flex items-center text-lg text-gray-600 mb-2">
-                          <span className="font-semibold">{exp.company}</span>
+                          <a
+                            href={exp.companyUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="font-semibold hover:underline hover:text-blue-600 transition-colors"
+                          >
+                            {exp.company}
+                          </a>
                           <ExternalLink size={16} className="ml-2 text-gray-400" />
                         </div>
                         <div className="flex flex-col sm:flex-row sm:items-center text-sm text-gray-500 space-y-1 sm:space-y-0 sm:space-x-4">

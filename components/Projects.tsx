@@ -1,54 +1,45 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Github, ExternalLink, Code, Database, Cpu } from 'lucide-react'
+import { Github, Code, Database, Cpu } from 'lucide-react'
 
 const projects = [
   {
     title: 'Fitness Tracker',
-    description: 'A responsive fitness-tracking web application enabling users to log workouts & meals, fetch nutrition data from the USDA FoodData API, and receive AI-driven workout recommendations.',
+    description: 'A fitness-tracking web app with AI workout recommendations and nutrition logging.',
     features: [
-      'User authentication and real-time data storage with Firebase',
-      'Integration with USDA FoodData API for nutrition information',
-      'AI-driven workout recommendations and progress tracking',
-      'Dark-mode theming and smooth animations with Framer Motion',
-      'Responsive design optimized for all devices'
+      'User authentication and real-time data storage',
+      'Nutrition info from USDA API',
+      'AI-driven workout suggestions',
     ],
     technologies: ['React', 'Firebase', 'MUI', 'Framer Motion', 'USDA API'],
-    github: 'https://github.com/cdandeniya/fitness-tracker',
-    live: '#',
+    github: 'https://github.com/cdandeniya/strength-ai.git',
     icon: Code,
     color: 'blue'
   },
   {
     title: 'Online Stock Trading System',
-    description: 'A comprehensive online stock trading platform with relational database design, role-based access control, and real-time transaction capabilities.',
+    description: 'A stock trading platform with real-time transactions and role-based access.',
     features: [
-      'Relational database design with MySQL for data integrity',
-      'Role-based access control for customers, brokers, and managers',
-      'Real-time stock transactions and secure order placements',
-      'Transactional integrity using SQL commit/rollback mechanisms',
-      'Dynamic web-based interface with JavaScript and HTML'
+      'MySQL database design',
+      'Role-based access for users',
+      'Real-time stock transactions',
     ],
     technologies: ['Java', 'JavaScript', 'JDBC', 'MySQL', 'HTML'],
-    github: 'https://github.com/cdandeniya/stock-trading-system',
-    live: '#',
+    github: 'https://github.com/cdandeniya/stock-trader.git',
     icon: Database,
     color: 'green'
   },
   {
     title: 'Sockets Battleship Server',
-    description: 'A networked Battleship game in C using the Sockets API, enabling real-time gameplay between two clients connected to a centralized server.',
+    description: 'A networked Battleship game server in C for real-time multiplayer gameplay.',
     features: [
-      'Real-time multiplayer gameplay over network connections',
-      'Optimized data structures with dynamic memory management',
-      'Memory leak prevention verified with Valgrind',
-      'Automated test suite with interactive CLI',
-      'Server administration and real-time game monitoring'
+      'Real-time multiplayer over sockets',
+      'Memory leak prevention with Valgrind',
+      'Automated CLI test suite',
     ],
     technologies: ['C', 'C Sockets API', 'Valgrind', 'CLI'],
-    github: 'https://github.com/cdandeniya/socket-battleship-server-new',
-    live: '#',
+    github: 'https://github.com/cdandeniya/socket-battleship-server-new.git',
     icon: Cpu,
     color: 'purple'
   }
@@ -140,8 +131,8 @@ export default function Projects() {
                     </div>
                   </div>
 
-                  {/* Links */}
-                  <div className="flex space-x-4 pt-4 border-t border-gray-100">
+                  {/* GitHub Link Only */}
+                  <div className="flex pt-4 border-t border-gray-100">
                     <motion.a
                       href={project.github}
                       target="_blank"
@@ -152,17 +143,6 @@ export default function Projects() {
                     >
                       <Github size={16} className="mr-2" />
                       Code
-                    </motion.a>
-                    <motion.a
-                      href={project.live}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      className="flex items-center text-sm font-medium text-gray-600 hover:text-blue-600 transition-colors duration-200"
-                    >
-                      <ExternalLink size={16} className="mr-2" />
-                      Live Demo
                     </motion.a>
                   </div>
                 </div>

@@ -31,7 +31,6 @@ export default function About() {
               <div className="uppercase text-xs font-semibold text-gray-400 tracking-widest mb-1">Currently</div>
               <div className="text-gray-900 font-medium">
                 Computer Science & Applied Math student at Stony Brook University (GPA: 3.82/4.0).<br />
-                Lead Solutions Architect at OuterLabs Studio.
               </div>
             </div>
           </motion.div>
@@ -48,7 +47,7 @@ export default function About() {
             <div>
               <div className="uppercase text-xs font-semibold text-gray-400 tracking-widest mb-1">Previously</div>
               <div className="text-gray-900 font-medium">
-                Experience at Amazon and Sai AI. Built scalable systems, led technical solutions, and delivered award-winning products for 15,000+ users.
+                Experience at Amazon and OuterLabs. Built scalable systems, led technical solutions, and delivered award-winning products for 15,000+ users.
               </div>
             </div>
           </motion.div>
@@ -63,9 +62,9 @@ export default function About() {
           >
             <Hammer size={24} className="text-gray-300 mt-1" />
             <div>
-              <div className="uppercase text-xs font-semibold text-blue-400 tracking-widest mb-1">What I Love Solving For</div>
+              <div className="uppercase text-xs font-semibold text-blue-400 tracking-widest mb-1">Interests</div>
               <div className="text-gray-900 font-medium">
-                Product, UX, and strategy—especially building things from scratch, architecting systems, and collaborating on innovative technology and entrepreneurship.
+                Full-stack development, entrepreneurship, project management, product, UX, and building things from scratch.
               </div>
             </div>
           </motion.div>

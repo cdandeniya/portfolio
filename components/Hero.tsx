@@ -68,7 +68,7 @@ export default function Hero() {
               transition={{ delay: 1.0, duration: 0.8 }}
               className="text-2xl md:text-3xl text-gray-700 font-medium"
             >
-              Software Engineer & Lead Solutions Architect
+              Software Developer & Startup Enthusiast
             </motion.h2>
 
             {/* Description */}
@@ -79,7 +79,7 @@ export default function Hero() {
               className="text-lg text-gray-600 max-w-2xl leading-relaxed"
             >
               Computer Science student at Stony Brook University with experience in full-stack development, 
-              machine learning, and cloud architecture. Currently Lead Solutions Architect at OuterLabs Studio.
+              machine learning, and cloud architecture. 
             </motion.p>
 
             {/* CTA Buttons */}
@@ -89,14 +89,16 @@ export default function Hero() {
               transition={{ delay: 1.4, duration: 0.8 }}
               className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start items-center pt-4"
             >
-              <motion.button
+              <motion.a
+                href="/resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
-                onClick={scrollToAbout}
                 className="px-8 py-3 bg-gray-900 text-white rounded-lg font-medium hover:bg-gray-800 transition-colors duration-200 shadow-md hover:shadow-lg"
               >
-                Learn More
-              </motion.button>
+                Download Resume
+              </motion.a>
               
               <motion.a
                 href="mailto:cdandeniya1@gmail.com"

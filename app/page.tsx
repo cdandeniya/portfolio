@@ -40,7 +40,7 @@ export default function Home() {
           transition={{ duration: 0.5 }}
           className="text-2xl font-semibold text-gray-800"
         >
-          Chamod Dandeniya
+          Chanul Dandeniya
         </motion.div>
       </div>
     )
