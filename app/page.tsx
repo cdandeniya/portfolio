@@ -38,9 +38,17 @@ export default function Home() {
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5 }}
-          className="text-2xl font-semibold text-gray-800"
+          className="flex flex-col items-center"
         >
-          Chanul Dandeniya
+          <motion.div
+            initial={{ rotate: 0 }}
+            animate={{ rotate: 360 }}
+            transition={{ repeat: Infinity, duration: 1.2, ease: 'linear' }}
+            className="w-20 h-20 rounded-full bg-gradient-to-tr from-blue-600 via-purple-500 to-pink-500 flex items-center justify-center shadow-lg mb-6"
+          >
+            <span className="text-3xl font-extrabold text-white select-none drop-shadow-lg">CD</span>
+          </motion.div>
+          <span className="text-lg font-semibold text-gray-700 tracking-wide">Loading portfolio...</span>
         </motion.div>
       </div>
     )
