@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { Mail, Phone, MapPin, Github, Linkedin } from 'lucide-react'
+import { FileText } from 'lucide-react'
 
 export default function Contact() {
   return (
@@ -12,53 +13,38 @@ export default function Contact() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-12"
         >
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">Get In Touch</h2>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            I'm open to discussing new opportunities, interesting projects, 
-            or technology collaborations. Currently Lead Solutions Architect at OuterLabs Studio.
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            Open to new opportunities, projects, and collaborations.
           </p>
         </motion.div>
 
         <div className="max-w-4xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
-            <h3 className="text-2xl font-bold text-gray-900 mb-4">Let's Connect</h3>
-            <p className="text-gray-600 leading-relaxed">
-              I'm passionate about technology and always excited to connect with like-minded individuals. 
-              Whether you're interested in collaboration, new opportunities, or want to discuss 
-              interesting projects, I'd love to hear from you.
-            </p>
-          </motion.div>
-
           {/* Contact Details */}
           <div className="grid md:grid-cols-3 gap-8 mb-12">
-            <motion.div
+            {/* Email Card - Entire card clickable */}
+            <motion.a
+              href="mailto:cdandeniya1@gmail.com"
+              target="_blank"
+              rel="noopener noreferrer"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
               viewport={{ once: true }}
               whileHover={{ scale: 1.02 }}
-              className="text-center p-6 bg-gray-50 rounded-xl"
+              className="block text-center p-6 bg-gray-50 rounded-xl cursor-pointer hover:shadow-lg transition-shadow duration-200"
             >
               <div className="p-3 bg-gray-900 rounded-lg mx-auto mb-4 w-fit">
                 <Mail size={24} className="text-white" />
               </div>
               <h4 className="font-semibold text-gray-900 mb-2">Email</h4>
-              <a 
-                href="mailto:cdandeniya1@gmail.com"
-                className="text-gray-600 hover:text-gray-900 transition-colors duration-200"
-              >
+              <span className="text-gray-600 hover:text-gray-900 transition-colors duration-200">
                 cdandeniya1@gmail.com
-              </a>
-            </motion.div>
+              </span>
+            </motion.a>
 
+            {/* Location Card - not clickable */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -71,23 +57,29 @@ export default function Contact() {
                 <MapPin size={24} className="text-white" />
               </div>
               <h4 className="font-semibold text-gray-900 mb-2">Location</h4>
-              <p className="text-gray-600">Brooklyn, NY</p>
+              <p className="text-gray-600">NYC</p>
             </motion.div>
 
-            <motion.div
+            {/* Resume Card - Entire card clickable */}
+            <motion.a
+              href="/Chanul Dandeniya Resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
               viewport={{ once: true }}
               whileHover={{ scale: 1.02 }}
-              className="text-center p-6 bg-gray-50 rounded-xl"
+              className="block text-center p-6 bg-gray-50 rounded-xl cursor-pointer hover:shadow-lg transition-shadow duration-200"
             >
               <div className="p-3 bg-gray-900 rounded-lg mx-auto mb-4 w-fit">
-                <Phone size={24} className="text-white" />
+                <FileText size={24} className="text-white" />
               </div>
-              <h4 className="font-semibold text-gray-900 mb-2">Phone</h4>
-              <p className="text-gray-600">Available upon request</p>
-            </motion.div>
+              <h4 className="font-semibold text-gray-900 mb-2">Resume</h4>
+              <span className="text-gray-600 hover:text-gray-900 transition-colors duration-200">
+                Download PDF
+              </span>
+            </motion.a>
           </div>
 
           {/* Social Links */}
