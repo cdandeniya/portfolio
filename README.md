@@ -24,8 +24,7 @@ npm run dev
 Visit [http://localhost:3000](http://localhost:3000)
 
 ## 🌐 Deployment
-- **Recommended:** [Vercel](https://vercel.com) (connect your GitHub repo, deploy instantly)
-- Also works on Netlify, AWS Amplify, etc.
+- [Vercel](https://vercel.com) 
 
 ## 📞 Contact
 - Email: cdandeniya1@gmail.com
