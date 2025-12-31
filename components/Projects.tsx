@@ -2,32 +2,51 @@
 
 import { motion } from 'framer-motion'
 import { Github, ExternalLink } from 'lucide-react'
-import { useState } from 'react'
 
 const projects = [
+  {
+    title: 'Chiral Network',
+    description: 'Decentralized, BitTorrent-like P2P file-sharing platform with DHT-based peer discovery and multi-source downloads.',
+    features: [
+      'Implemented DHT file-access request handling and pending request tracking',
+      'Added download chunk integrity verification with tests and runtime checks',
+    ],
+    technologies: ['Rust', 'TypeScript', 'Svelte', 'P2P Networking', 'DHT'],
+    github: 'https://github.com/cdandeniya',
+    color: 'sky'
+  },
+  {
+    title: 'Cruise',
+    description: 'Voice-first iOS navigation app with turn-by-turn routing, real-time GPS tracking, and AI voice assistant.',
+    features: [
+      'AI voice assistant with speech-to-text and natural-language command handling',
+      'Google Maps integration with real-time GPS tracking',
+    ],
+    technologies: ['React Native', 'Expo', 'TypeScript', 'Google Maps API', 'OpenAI GPT-4', 'iOS'],
+    github: 'https://github.com/cdandeniya',
+    color: 'green'
+  },
+  {
+    title: 'NovaTrade',
+    description: 'Full-stack stock trading web application with role-based access control, portfolio tracking, and order execution.',
+    features: [
+      'Advanced order types (Market, Trailing Stop, Hidden Stop)',
+      'Layered architecture with JDBC DAOs and MySQL',
+    ],
+    technologies: ['Java', 'JSP', 'Servlets', 'JDBC', 'MySQL', 'Tomcat', 'Maven'],
+    github: 'https://github.com/cdandeniya',
+    color: 'yellow'
+  },
   {
     title: 'Fitness Tracker',
     description: 'A fitness-tracking web app with AI workout recommendations and nutrition logging.',
     features: [
       'User authentication and real-time data storage',
-      'Nutrition info from USDA API',
       'AI-driven workout suggestions',
     ],
     technologies: ['React', 'Firebase', 'MUI', 'Framer Motion', 'USDA API'],
     github: 'https://github.com/cdandeniya/strength-ai.git',
-    color: 'sky'
-  },
-  {
-    title: 'Online Stock Trading System',
-    description: 'A stock trading platform with real-time transactions and role-based access.',
-    features: [
-      'MySQL database design',
-      'Role-based access for users',
-      'Real-time stock transactions',
-    ],
-    technologies: ['Java', 'JavaScript', 'JDBC', 'MySQL', 'HTML'],
-    github: 'https://github.com/cdandeniya/stock-trader.git',
-    color: 'green'
+    color: 'purple'
   },
   {
     title: 'Sockets Battleship Server',
@@ -35,17 +54,14 @@ const projects = [
     features: [
       'Real-time multiplayer over sockets',
       'Memory leak prevention with Valgrind',
-      'Automated CLI test suite',
     ],
     technologies: ['C', 'C Sockets API', 'Valgrind', 'CLI'],
     github: 'https://github.com/cdandeniya/socket-battleship-server-new.git',
-    color: 'yellow'
+    color: 'orange'
   }
 ]
 
 export default function Projects() {
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
-
   return (
     <section id="projects" className="section-padding bg-white relative">
       <div className="container-studio">
@@ -60,16 +76,24 @@ export default function Projects() {
           <div className="flex items-center gap-4 mb-4">
             <div className="w-1 h-12 bg-gradient-to-b from-sky-400 to-blue-500" />
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-black">
-              Meet my Projects
+              Projects
             </h2>
           </div>
           <div className="h-1 w-32 bg-gradient-to-r from-sky-400 via-blue-500 to-yellow-400 mt-2" />
         </motion.div>
 
-        {/* Projects Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
+        {/* Full-Width Alternating Layout */}
+        <div className="space-y-12 md:space-y-16">
           {projects.map((project, index) => {
-            const isHovered = hoveredIndex === index
+            const isEven = index % 2 === 0
+            const gradientColors = {
+              sky: 'from-sky-200 to-blue-300',
+              green: 'from-green-200 to-emerald-300',
+              yellow: 'from-yellow-200 to-amber-300',
+              purple: 'from-purple-200 to-purple-300',
+              orange: 'from-orange-200 to-orange-300'
+            }
+
             return (
               <motion.div
                 key={project.title}
@@ -77,90 +101,75 @@ export default function Projects() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: index * 0.1 }}
                 viewport={{ once: true }}
-                onHoverStart={() => setHoveredIndex(index)}
-                onHoverEnd={() => setHoveredIndex(null)}
-                className="group relative"
+                className="group"
               >
-                <motion.div
-                  whileHover={{ y: -8 }}
-                  transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                  className={`relative overflow-hidden bg-white shadow-lg ${
-                    isHovered ? 'ring-4 ring-yellow-400' : ''
-                  } transition-all duration-500`}
-                >
-                  {/* Project Image Placeholder - Using gradient based on color */}
-                  <div className={`h-64 bg-gradient-to-br ${
-                    project.color === 'sky' ? 'from-sky-200 to-blue-300' :
-                    project.color === 'green' ? 'from-green-200 to-emerald-300' :
-                    'from-yellow-200 to-amber-300'
-                  } relative overflow-hidden`}>
-                    <motion.div
-                      initial={{ scale: 1 }}
-                      animate={isHovered ? { scale: 1.1 } : { scale: 1 }}
-                      transition={{ duration: 0.5 }}
-                      className="absolute inset-0 flex items-center justify-center"
-                    >
-                      <div className="text-6xl font-extrabold text-white/20">
-                        {project.title.charAt(0)}
-                      </div>
-                    </motion.div>
-                  </div>
+                <div className={`flex flex-col ${isEven ? 'md:flex-row' : 'md:flex-row-reverse'} gap-6 md:gap-8 items-center`}>
+                  {/* Visual Element */}
+                  <motion.div
+                    whileHover={{ scale: 1.02 }}
+                    transition={{ duration: 0.4 }}
+                    className={`w-full md:w-1/2 h-48 md:h-64 bg-gradient-to-br ${gradientColors[project.color as keyof typeof gradientColors]} rounded-2xl flex items-center justify-center relative overflow-hidden`}
+                  >
+                    <div className="text-7xl md:text-8xl font-extrabold text-white/20">
+                      {project.title.charAt(0)}
+                    </div>
+                  </motion.div>
 
-                  {/* Project Info */}
-                  <div className="p-6">
-                    <h3 className="text-2xl font-bold text-black mb-3 group-hover:text-sky-600 transition-colors duration-300">
-                      {project.title}
-                    </h3>
-                    <p className="text-base font-light text-black/60 mb-4 studio-text line-clamp-3">
-                      {project.description}
-                    </p>
-
-                    {/* Technologies */}
-                    <div className="flex flex-wrap gap-2 mb-6">
-                      {project.technologies.slice(0, 3).map((tech) => (
-                        <span
-                          key={tech}
-                          className="px-3 py-1 text-xs font-light text-black/60 bg-black/5 border border-black/10"
-                        >
-                          {tech}
-                        </span>
-                      ))}
-                      {project.technologies.length > 3 && (
-                        <span className="px-3 py-1 text-xs font-light text-black/40">
-                          +{project.technologies.length - 3}
-                        </span>
-                      )}
+                  {/* Content */}
+                  <div className="w-full md:w-1/2 space-y-4">
+                    <div>
+                      <h3 className="text-2xl md:text-3xl font-bold text-black mb-2 group-hover:text-sky-600 transition-colors duration-300">
+                        {project.title}
+                      </h3>
+                      <p className="text-base md:text-lg font-light text-black/70 studio-text leading-relaxed">
+                        {project.description}
+                      </p>
                     </div>
 
-                    {/* View Code Button */}
-                    <motion.a
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      whileHover={{ x: 4 }}
-                      whileTap={{ scale: 0.98 }}
-                      className="inline-flex items-center gap-2 px-6 py-3 bg-black text-white text-sm font-medium tracking-wider uppercase hover:bg-black/90 transition-all duration-300 w-full justify-center group/btn"
-                    >
-                      <Github size={16} />
-                      View Code
-                      <motion.span
-                        initial={{ x: 0 }}
-                        whileHover={{ x: 4 }}
-                        className="inline-block"
-                      >
-                        <ExternalLink size={14} />
-                      </motion.span>
-                    </motion.a>
-                  </div>
+                    {/* Features */}
+                    <ul className="space-y-2">
+                      {project.features.map((feature, idx) => (
+                        <motion.li
+                          key={idx}
+                          initial={{ opacity: 0, x: isEven ? -10 : 10 }}
+                          whileInView={{ opacity: 1, x: 0 }}
+                          transition={{ duration: 0.5, delay: idx * 0.05 }}
+                          viewport={{ once: true }}
+                          className="text-sm md:text-base font-light text-black/60 flex items-start"
+                        >
+                          <span className="text-sky-400 mr-3 mt-1 flex-shrink-0">—</span>
+                          <span>{feature}</span>
+                        </motion.li>
+                      ))}
+                    </ul>
 
-                  {/* Hover Overlay Effect */}
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: isHovered ? 0.05 : 0 }}
-                    transition={{ duration: 0.3 }}
-                    className="absolute inset-0 bg-black pointer-events-none"
-                  />
-                </motion.div>
+                    {/* Technologies & Link */}
+                    <div className="flex flex-col gap-3 pt-2">
+                      <div className="flex flex-wrap gap-2">
+                        {project.technologies.map((tech) => (
+                          <span
+                            key={tech}
+                            className="px-3 py-1 text-xs font-light text-black/50 bg-black/5 border border-black/10 hover:border-black/30 hover:text-black/70 transition-colors duration-300"
+                          >
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+                      <motion.a
+                        href={project.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        whileHover={{ x: 4 }}
+                        whileTap={{ scale: 0.98 }}
+                        className="inline-flex items-center gap-2 text-sm font-light text-black/60 hover:text-black transition-colors duration-300 group/link w-fit"
+                      >
+                        <Github size={16} />
+                        View on GitHub
+                        <ExternalLink size={14} className="opacity-0 group-hover/link:opacity-100 transition-opacity" />
+                      </motion.a>
+                    </div>
+                  </div>
+                </div>
               </motion.div>
             )
           })}
@@ -170,7 +179,7 @@ export default function Projects() {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.4 }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.5 }}
           viewport={{ once: true }}
           className="text-center mt-16"
         >

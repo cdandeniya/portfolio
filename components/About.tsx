@@ -24,49 +24,59 @@ export default function About() {
             <div className="h-1 w-32 bg-gradient-to-r from-sky-400 via-blue-500 to-yellow-400 mt-2" />
           </motion.div>
 
-          <div className="space-y-16 md:space-y-24">
-            {/* Currently */}
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-              viewport={{ once: true }}
-              className="border-l-4 border-sky-400 pl-8 md:pl-12"
-            >
-              <div className="uppercase text-xs font-light tracking-[0.3em] text-black/40 mb-4">Currently</div>
-              <div className="text-xl md:text-2xl font-light text-black/80 studio-text">
-                Computer Science & Applied Math student at Stony Brook University (GPA: 3.82/4.0).
-              </div>
-            </motion.div>
-
-            {/* Previously */}
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-              viewport={{ once: true }}
-              className="border-l-4 border-blue-500 pl-8 md:pl-12"
-            >
-              <div className="uppercase text-xs font-light tracking-[0.3em] text-black/40 mb-4">Previously</div>
-              <div className="text-xl md:text-2xl font-light text-black/80 studio-text">
-                Experience at Amazon and OuterLabs. Built scalable systems, led technical solutions, and delivered award-winning products for 15,000+ users.
-              </div>
-            </motion.div>
-
-            {/* Interests */}
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
-              viewport={{ once: true }}
-              className="border-l-4 border-yellow-400 pl-8 md:pl-12"
-            >
-              <div className="uppercase text-xs font-light tracking-[0.3em] text-black/40 mb-4">Interests</div>
-              <div className="text-xl md:text-2xl font-light text-black/80 studio-text">
-                Full-stack development, entrepreneurship, project management, product, UX, and building things from scratch.
-              </div>
-            </motion.div>
-          </div>
+          {/* Narrative About Text */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            viewport={{ once: true }}
+            className="max-w-3xl relative"
+          >
+            {/* Decorative element */}
+            <div className="absolute -left-8 top-0 bottom-0 w-1 bg-gradient-to-b from-sky-400 via-blue-500 to-yellow-400 opacity-30 hidden md:block" />
+            
+            <div className="pl-0 md:pl-12 space-y-6 md:space-y-8">
+              <motion.p
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                viewport={{ once: true }}
+                className="text-xl md:text-2xl lg:text-3xl font-light text-black/80 studio-text leading-relaxed"
+              >
+                Driven problem solver with experience in{' '}
+                <span className="font-medium text-black">full-stack development</span>,{' '}
+                <span className="font-medium text-black">backend systems</span>, and{' '}
+                <span className="font-medium text-black">technical project leadership</span>.
+              </motion.p>
+              
+              <motion.p
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+                viewport={{ once: true }}
+                className="text-xl md:text-2xl lg:text-3xl font-light text-black/80 studio-text leading-relaxed"
+              >
+                I love building{' '}
+                <span className="font-medium text-black">impactful products</span>, working on{' '}
+                <span className="font-medium text-black">fast-moving teams</span>, and solving{' '}
+                <span className="font-medium text-black">real problems</span> through technology.
+              </motion.p>
+              
+              <motion.p
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ duration: 0.8, delay: 0.6 }}
+                viewport={{ once: true }}
+                className="text-xl md:text-2xl lg:text-3xl font-light text-black/80 studio-text leading-relaxed"
+              >
+                Currently exploring{' '}
+                <span className="font-medium text-black">software engineering</span> and{' '}
+                <span className="font-medium text-black">project management</span> opportunities in{' '}
+                <span className="font-medium text-black">big tech</span> and{' '}
+                <span className="font-medium text-black">startup environments</span>.
+              </motion.p>
+            </div>
+          </motion.div>
         </div>
       </div>
     </section>
