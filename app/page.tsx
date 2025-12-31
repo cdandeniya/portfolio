@@ -33,36 +33,49 @@ export default function Home() {
 
   if (isLoading) {
     return (
-      <div className="fixed inset-0 bg-white flex items-center justify-center z-50">
+      <div className="fixed inset-0 gradient-bg flex items-center justify-center z-50">
         <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           className="flex flex-col items-center"
         >
           <motion.div
-            initial={{ rotate: 0 }}
-            animate={{ rotate: 360 }}
-            transition={{ repeat: Infinity, duration: 1.2, ease: 'linear' }}
-            className="w-20 h-20 rounded-full bg-gradient-to-tr from-blue-600 via-purple-500 to-pink-500 flex items-center justify-center shadow-lg mb-6"
+            initial={{ scale: 0.9, rotate: -10 }}
+            animate={{ scale: 1, rotate: 0 }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="mb-8"
           >
-            <span className="text-3xl font-extrabold text-white select-none drop-shadow-lg">CD</span>
+            <span className="text-5xl font-extrabold text-black select-none">CD</span>
           </motion.div>
-          <span className="text-lg font-semibold text-gray-700 tracking-wide">Loading portfolio...</span>
+          <motion.div
+            initial={{ width: 0 }}
+            animate={{ width: 80 }}
+            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+            className="h-1 bg-gradient-to-r from-sky-400 via-blue-500 to-yellow-400 mb-4"
+          />
+          <motion.span
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.8 }}
+            className="text-xs font-light text-black/50 tracking-[0.3em] uppercase"
+          >
+            Loading
+          </motion.span>
         </motion.div>
       </div>
     )
   }
 
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen relative">
       <Cursor mousePosition={mousePosition} />
       <Navigation />
       
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 0.8 }}
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
       >
         <Hero />
         <About />

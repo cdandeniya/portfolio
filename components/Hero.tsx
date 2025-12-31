@@ -1,29 +1,64 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { motion, useScroll, useTransform } from 'framer-motion'
 import { ArrowDown, Github, Linkedin, Mail } from 'lucide-react'
 import { useRef } from 'react'
 
 export default function Hero() {
-  const resumeRippleRef = useRef<HTMLSpanElement>(null)
-  const contactRippleRef = useRef<HTMLSpanElement>(null)
-
-  const handleRipple = (ref: React.RefObject<HTMLSpanElement>) => {
-    const ripple = ref.current
-    if (ripple) {
-      ripple.classList.remove('animate-ripple')
-      void ripple.offsetWidth
-      ripple.classList.add('animate-ripple')
-    }
-  }
+  const containerRef = useRef<HTMLDivElement>(null)
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"]
+  })
+  
+  const y = useTransform(scrollYProgress, [0, 1], [0, -100])
+  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0])
 
   const scrollToAbout = () => {
     document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })
   }
 
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center bg-white">
-      <div className="relative max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-8 md:py-14">
+    <section 
+      ref={containerRef}
+      id="home" 
+      className="min-h-screen flex items-center justify-center relative overflow-hidden"
+    >
+      {/* Animated Background Gradient */}
+      <motion.div 
+        className="absolute inset-0 gradient-bg"
+        style={{ y }}
+      />
+      
+      {/* Floating gradient orbs */}
+      <motion.div
+        className="absolute top-20 left-10 w-72 h-72 bg-sky-200/30 rounded-full blur-3xl"
+        animate={{
+          x: [0, 100, 0],
+          y: [0, 50, 0],
+          scale: [1, 1.2, 1],
+        }}
+        transition={{
+          duration: 20,
+          repeat: Infinity,
+          ease: "easeInOut"
+        }}
+      />
+      <motion.div
+        className="absolute bottom-20 right-10 w-96 h-96 bg-yellow-200/20 rounded-full blur-3xl"
+        animate={{
+          x: [0, -80, 0],
+          y: [0, -60, 0],
+          scale: [1, 1.3, 1],
+        }}
+        transition={{
+          duration: 25,
+          repeat: Infinity,
+          ease: "easeInOut"
+        }}
+      />
+
+      <div className="relative container-studio py-20 md:py-32 z-10">
         <motion.div
           initial="hidden"
           animate="visible"
@@ -31,106 +66,96 @@ export default function Hero() {
             hidden: {},
             visible: { transition: { staggerChildren: 0.15 } },
           }}
-          className="flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-14"
+          className="flex flex-col lg:flex-row items-center lg:items-start gap-12 lg:gap-16 xl:gap-24"
         >
           {/* Profile Photo - Left Side */}
           <motion.div
             variants={{
               hidden: { opacity: 0, scale: 0.8, x: -50 },
-              visible: { opacity: 1, scale: 1, x: 0, transition: { type: 'spring', duration: 0.8 } },
+              visible: { opacity: 1, scale: 1, x: 0, transition: { duration: 1, ease: [0.16, 1, 0.3, 1] } },
             }}
-            whileHover={{
-              scale: 1.04,
-              boxShadow: '0 8px 32px 0 rgba(59,130,246,0.25)',
-            }}
-            className="flex-shrink-0 group"
+            className="flex-shrink-0 w-64 md:w-80 lg:w-96"
           >
-            <div className="w-32 h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 rounded-full overflow-hidden shadow-xl">
+            <motion.div
+              className="w-full aspect-[3/4] rounded-3xl overflow-hidden border-4 border-white shadow-2xl"
+              whileHover={{ scale: 1.02 }}
+              transition={{ duration: 0.5 }}
+            >
               <img
                 src="/profile-photo.jpg"
                 alt="Chanul Dandeniya"
                 className="w-full h-full object-cover"
               />
-            </div>
+            </motion.div>
           </motion.div>
 
           {/* Content - Right Side */}
           <motion.div
             variants={{
               hidden: { opacity: 0, x: 50 },
-              visible: { opacity: 1, x: 0, transition: { type: 'spring', duration: 0.8 } },
+              visible: { opacity: 1, x: 0, transition: { duration: 0.8, delay: 0.2 } },
             }}
-            className="flex-1 text-center lg:text-left space-y-6"
+            className="flex-1 text-center lg:text-left"
           >
-            {/* Greeting */}
+            {/* Welcome Text */}
             <motion.p
               variants={{
-                hidden: { opacity: 0, y: 10 },
-                visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+                hidden: { opacity: 0, y: 20 },
+                visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
               }}
-              className="text-xl text-gray-600 font-semibold tracking-wide mb-1"
+              className="text-xs font-light tracking-[0.3em] uppercase text-black/50 mb-6"
             >
-              Hello, my name is
+              Welcome
             </motion.p>
 
-            {/* Name */}
+            {/* Main Heading */}
             <motion.h1
               variants={{
-                hidden: { opacity: 0, y: 20 },
-                visible: { opacity: 1, y: 0, transition: { duration: 0.7 } },
+                hidden: { opacity: 0, y: 30 },
+                visible: { opacity: 1, y: 0, transition: { duration: 0.8, delay: 0.2 } },
               }}
-              className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 mb-1"
+              className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-extrabold text-black mb-6 leading-[1.1]"
             >
-              Chanul{' '}
-              <span className="gradient-text">Dandeniya</span>
+              Hi, my name is{' '}
+              <span className="gradient-text">Chanul Dandeniya</span>
+              <br />
+              <span className="text-black">Software Developer</span>
             </motion.h1>
-
-            {/* Title */}
-            <motion.h2
-              variants={{
-                hidden: { opacity: 0, y: 20 },
-                visible: { opacity: 1, y: 0, transition: { duration: 0.7 } },
-              }}
-              className="text-xl md:text-2xl text-gray-700 font-semibold mb-2"
-            >
-              Software Developer & Startup Enthusiast
-            </motion.h2>
 
             {/* Description */}
             <motion.p
               variants={{
                 hidden: { opacity: 0, y: 20 },
-                visible: { opacity: 1, y: 0, transition: { duration: 0.7 } },
+                visible: { opacity: 1, y: 0, transition: { duration: 0.8, delay: 0.4 } },
               }}
-              className="text-base text-gray-600 max-w-2xl leading-relaxed mx-auto lg:mx-0 mb-4"
+              className="text-lg md:text-xl font-light text-black/60 mb-10 studio-text max-w-2xl mx-auto lg:mx-0"
             >
-              Computer Science student at Stony Brook University with experience in full-stack development, 
-              machine learning, and cloud architecture. 
+              Tap on each section to learn more about my personal achievements, interests, professional experiences, academic pursuits, and unique contributions to the tech community.
             </motion.p>
 
             {/* CTA Buttons */}
             <motion.div
               variants={{
                 hidden: { opacity: 0, y: 20 },
-                visible: { opacity: 1, y: 0, transition: { duration: 0.7 } },
+                visible: { opacity: 1, y: 0, transition: { duration: 0.8, delay: 0.6 } },
               }}
-              className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start items-center pt-2"
+              className="flex flex-col sm:flex-row gap-4 mb-10 justify-center lg:justify-start"
             >
               <motion.a
                 href="/Chanul Dandeniya Resume.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                whileHover={{ scale: 1.07, background: 'linear-gradient(90deg,#2563eb,#1e40af)' }}
-                whileTap={{ scale: 0.97 }}
-                className="px-8 py-3 bg-gray-900 text-white rounded-lg font-semibold text-base hover:bg-blue-700 transition-colors duration-200 shadow-md hover:shadow-lg"
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.95 }}
+                className="px-8 py-3 bg-black text-white text-sm font-medium tracking-wider uppercase hover:bg-black/90 transition-all duration-300 shadow-lg"
               >
                 Download Resume
               </motion.a>
               <motion.a
                 href="mailto:cdandeniya1@gmail.com"
-                whileHover={{ scale: 1.07, background: 'linear-gradient(90deg,#fff,#dbeafe)' }}
-                whileTap={{ scale: 0.97 }}
-                className="px-8 py-3 border-2 border-gray-900 text-gray-900 rounded-lg font-semibold text-base hover:bg-gray-900 hover:text-white transition-all duration-200"
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.95 }}
+                className="px-8 py-3 border-2 border-black text-black text-sm font-medium tracking-wider uppercase hover:bg-black hover:text-white transition-all duration-300"
               >
                 Get In Touch
               </motion.a>
@@ -140,50 +165,31 @@ export default function Hero() {
             <motion.div
               variants={{
                 hidden: { opacity: 0 },
-                visible: { opacity: 1, transition: { staggerChildren: 0.12 } },
+                visible: { opacity: 1, transition: { staggerChildren: 0.1, delay: 0.8 } },
               }}
-              className="flex justify-center lg:justify-start space-x-5 pt-4"
+              className="flex gap-6 justify-center lg:justify-start"
             >
-              <motion.a
-                href="https://github.com/cdandeniya"
-                target="_blank"
-                rel="noopener noreferrer"
-                variants={{
-                  hidden: { opacity: 0, y: 10 },
-                  visible: { opacity: 1, y: 0, transition: { type: 'spring', duration: 0.5 } },
-                }}
-                whileHover={{ scale: 1.18, rotate: -8, boxShadow: '0 2px 16px 0 #dbeafe' }}
-                whileTap={{ scale: 0.95 }}
-                className="p-3 bg-gray-100 rounded-full hover:bg-blue-100 transition-colors duration-200"
-              >
-                <Github size={22} className="text-gray-700" />
-              </motion.a>
-              <motion.a
-                href="https://www.linkedin.com/in/cdandeniya/"
-                target="_blank"
-                rel="noopener noreferrer"
-                variants={{
-                  hidden: { opacity: 0, y: 10 },
-                  visible: { opacity: 1, y: 0, transition: { type: 'spring', duration: 0.5 } },
-                }}
-                whileHover={{ scale: 1.18, rotate: 8, boxShadow: '0 2px 16px 0 #dbeafe' }}
-                whileTap={{ scale: 0.95 }}
-                className="p-3 bg-gray-100 rounded-full hover:bg-blue-100 transition-colors duration-200"
-              >
-                <Linkedin size={22} className="text-gray-700" />
-              </motion.a>
-              <motion.a
-                href="mailto:cdandeniya1@gmail.com"
-                variants={{
-                  hidden: { opacity: 0, y: 10 },
-                  visible: { opacity: 1, y: 0, transition: { type: 'spring', duration: 0.5 } },
-                }}
-                whileHover={{ scale: 1.18, rotate: 0, boxShadow: '0 2px 16px 0 #dbeafe' }}
-                whileTap={{ scale: 0.95 }}
-                className="p-3 bg-gray-100 rounded-full hover:bg-blue-100 transition-colors duration-200"
-              >
-                <Mail size={22} className="text-gray-700" />
-              </motion.a>
+              {[
+                { icon: Github, href: 'https://github.com/cdandeniya' },
+                { icon: Linkedin, href: 'https://www.linkedin.com/in/cdandeniya/' },
+                { icon: Mail, href: 'mailto:cdandeniya1@gmail.com' },
+              ].map(({ icon: Icon, href }, idx) => (
+                <motion.a
+                  key={href}
+                  href={href}
+                  target={href.startsWith('mailto:') ? undefined : '_blank'}
+                  rel={href.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
+                  variants={{
+                    hidden: { opacity: 0, scale: 0 },
+                    visible: { opacity: 1, scale: 1, transition: { type: 'spring', duration: 0.5 } },
+                  }}
+                  whileHover={{ scale: 1.2, rotate: 5 }}
+                  whileTap={{ scale: 0.9 }}
+                  className="p-3 bg-white/80 backdrop-blur-sm rounded-full text-black/60 hover:text-black hover:bg-white transition-colors duration-300 shadow-md"
+                >
+                  <Icon size={20} />
+                </motion.a>
+              ))}
             </motion.div>
           </motion.div>
         </motion.div>
@@ -192,39 +198,21 @@ export default function Hero() {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1.8, duration: 0.8 }}
-          className="absolute bottom-4 left-1/2 transform -translate-x-1/2"
+          transition={{ delay: 2, duration: 0.8 }}
+          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+          style={{ opacity }}
         >
           <motion.button
             onClick={scrollToAbout}
-            animate={{ y: [0, 10, 0], boxShadow: ['0 0 0 0 #3b82f6', '0 0 16px 4px #3b82f6', '0 0 0 0 #3b82f6'] }}
-            transition={{ duration: 2, repeat: Infinity }}
-            whileHover={{ scale: 1.2, boxShadow: '0 0 24px 8px #3b82f6' }}
-            className="p-2 text-gray-400 hover:text-blue-600 transition-colors duration-200 rounded-full"
+            animate={{ y: [0, 10, 0] }}
+            transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+            whileHover={{ scale: 1.2 }}
+            className="text-black/40 hover:text-black transition-colors duration-300"
           >
-            <ArrowDown size={20} />
+            <ArrowDown size={24} />
           </motion.button>
         </motion.div>
-        <style jsx>{`
-          .animate-ripple {
-            animation: ripple 0.5s linear;
-          }
-          @keyframes ripple {
-            0% {
-              transform: scale(0.2);
-              opacity: 0.6;
-            }
-            70% {
-              transform: scale(1);
-              opacity: 0.3;
-            }
-            100% {
-              transform: scale(1.2);
-              opacity: 0;
-            }
-          }
-        `}</style>
       </div>
     </section>
   )
-} 
+}

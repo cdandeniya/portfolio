@@ -1,75 +1,74 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { GraduationCap, Briefcase, Hammer } from 'lucide-react'
 
 export default function About() {
   return (
-    <section id="about" className="py-32 bg-white">
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">About Me</h2>
-        </motion.div>
-
-        <div className="space-y-12">
-          {/* Currently */}
+    <section id="about" className="section-padding bg-white relative">
+      <div className="container-studio">
+        <div className="max-w-4xl mx-auto">
+          {/* Section Header */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.1 }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             viewport={{ once: true }}
-            className="flex items-start gap-4"
+            className="mb-16 md:mb-24"
           >
-            <GraduationCap size={24} className="text-gray-300 mt-1" />
-            <div>
-              <div className="uppercase text-xs font-semibold text-gray-400 tracking-widest mb-1">Currently</div>
-              <div className="text-gray-900 font-medium">
-                Computer Science & Applied Math student at Stony Brook University (GPA: 3.82/4.0).<br />
-              </div>
+            <div className="flex items-center gap-4 mb-4">
+              <div className="w-1 h-12 bg-gradient-to-b from-sky-400 to-blue-500" />
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-black">
+                About Me
+              </h2>
             </div>
+            <div className="h-1 w-32 bg-gradient-to-r from-sky-400 via-blue-500 to-yellow-400 mt-2" />
           </motion.div>
 
-          {/* Previously */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.2 }}
-            viewport={{ once: true }}
-            className="flex items-start gap-4"
-          >
-            <Briefcase size={24} className="text-gray-300 mt-1" />
-            <div>
-              <div className="uppercase text-xs font-semibold text-gray-400 tracking-widest mb-1">Previously</div>
-              <div className="text-gray-900 font-medium">
+          <div className="space-y-16 md:space-y-24">
+            {/* Currently */}
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+              viewport={{ once: true }}
+              className="border-l-4 border-sky-400 pl-8 md:pl-12"
+            >
+              <div className="uppercase text-xs font-light tracking-[0.3em] text-black/40 mb-4">Currently</div>
+              <div className="text-xl md:text-2xl font-light text-black/80 studio-text">
+                Computer Science & Applied Math student at Stony Brook University (GPA: 3.82/4.0).
+              </div>
+            </motion.div>
+
+            {/* Previously */}
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+              viewport={{ once: true }}
+              className="border-l-4 border-blue-500 pl-8 md:pl-12"
+            >
+              <div className="uppercase text-xs font-light tracking-[0.3em] text-black/40 mb-4">Previously</div>
+              <div className="text-xl md:text-2xl font-light text-black/80 studio-text">
                 Experience at Amazon and OuterLabs. Built scalable systems, led technical solutions, and delivered award-winning products for 15,000+ users.
               </div>
-            </div>
-          </motion.div>
+            </motion.div>
 
-          {/* What I Love Solving For / Interests */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.3 }}
-            viewport={{ once: true }}
-            className="flex items-start gap-4"
-          >
-            <Hammer size={24} className="text-gray-300 mt-1" />
-            <div>
-              <div className="uppercase text-xs font-semibold text-blue-400 tracking-widest mb-1">Interests</div>
-              <div className="text-gray-900 font-medium">
+            {/* Interests */}
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
+              viewport={{ once: true }}
+              className="border-l-4 border-yellow-400 pl-8 md:pl-12"
+            >
+              <div className="uppercase text-xs font-light tracking-[0.3em] text-black/40 mb-4">Interests</div>
+              <div className="text-xl md:text-2xl font-light text-black/80 studio-text">
                 Full-stack development, entrepreneurship, project management, product, UX, and building things from scratch.
               </div>
-            </div>
-          </motion.div>
+            </motion.div>
+          </div>
         </div>
       </div>
     </section>
   )
-} 
+}
