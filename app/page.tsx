@@ -22,7 +22,7 @@ export default function Home() {
     window.addEventListener('mousemove', handleMouseMove)
     
     // Simulate loading
-    const timer = setTimeout(() => setIsLoading(false), 1000)
+    const timer = setTimeout(() => setIsLoading(false), 2500)
     
     return () => {
       window.removeEventListener('mousemove', handleMouseMove)
@@ -40,27 +40,20 @@ export default function Home() {
           className="flex flex-col items-center"
         >
           <motion.div
-            initial={{ scale: 0.9, rotate: -10 }}
-            animate={{ scale: 1, rotate: 0 }}
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             className="mb-8"
           >
-            <span className="text-5xl font-extrabold text-black select-none">CD</span>
+            <span className="text-4xl md:text-5xl font-extrabold text-black select-none">Loading Portfolio</span>
           </motion.div>
           <motion.div
-            initial={{ width: 0 }}
-            animate={{ width: 80 }}
-            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-            className="h-1 bg-gradient-to-r from-sky-400 via-blue-500 to-yellow-400 mb-4"
+            initial={{ scaleX: 0, opacity: 0 }}
+            animate={{ scaleX: 1, opacity: 1 }}
+            transition={{ duration: 2, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+            className="h-1 w-[80vw] max-w-4xl bg-gradient-to-r from-sky-400 via-blue-500 to-yellow-400 mb-4 origin-center"
+            style={{ transformOrigin: 'center' }}
           />
-          <motion.span
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.8 }}
-            className="text-xs font-light text-black/50 tracking-[0.3em] uppercase"
-          >
-            Loading
-          </motion.span>
         </motion.div>
       </div>
     )
