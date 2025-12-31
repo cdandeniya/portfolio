@@ -1,7 +1,7 @@
 'use client'
 
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { ArrowDown, Github, Linkedin, Mail } from 'lucide-react'
+import { ArrowDown, Github, Linkedin, Mail, Twitter } from 'lucide-react'
 import { useRef } from 'react'
 
 export default function Hero() {
@@ -97,38 +97,26 @@ export default function Hero() {
             }}
             className="flex-1 text-center lg:text-left"
           >
-            {/* Welcome Text */}
-            <motion.p
-              variants={{
-                hidden: { opacity: 0, y: 20 },
-                visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
-              }}
-              className="text-xs font-light tracking-[0.3em] uppercase text-black/50 mb-6"
-            >
-              Welcome
-            </motion.p>
-
             {/* Main Heading */}
             <motion.h1
               variants={{
                 hidden: { opacity: 0, y: 30 },
-                visible: { opacity: 1, y: 0, transition: { duration: 0.8, delay: 0.2 } },
+                visible: { opacity: 1, y: 0, transition: { duration: 0.8, delay: 0.1 } },
               }}
-              className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-extrabold text-black mb-6 leading-[1.1]"
+              className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-extrabold text-black mb-8 leading-[1.1]"
             >
               Hi, my name is{' '}
-              <span className="gradient-text">Chanul Dandeniya</span>
               <br />
-              <span className="text-black">Software Developer</span>
+              <span className="gradient-text">Chanul Dandeniya</span>
             </motion.h1>
 
             {/* Description */}
             <motion.p
               variants={{
                 hidden: { opacity: 0, y: 20 },
-                visible: { opacity: 1, y: 0, transition: { duration: 0.8, delay: 0.4 } },
+                visible: { opacity: 1, y: 0, transition: { duration: 0.8, delay: 0.3 } },
               }}
-              className="text-lg md:text-xl font-light text-black/60 mb-10 studio-text max-w-2xl mx-auto lg:mx-0"
+              className="text-lg md:text-xl lg:text-2xl font-light text-black/60 mb-10 studio-text max-w-2xl mx-auto lg:mx-0 leading-relaxed"
             >
               Tap on each section to learn more about my personal achievements, interests, professional experiences, academic pursuits, and unique contributions to the tech community.
             </motion.p>
@@ -151,14 +139,6 @@ export default function Hero() {
               >
                 Download Resume
               </motion.a>
-              <motion.a
-                href="mailto:cdandeniya1@gmail.com"
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.95 }}
-                className="px-8 py-3 border-2 border-black text-black text-sm font-medium tracking-wider uppercase hover:bg-black hover:text-white transition-all duration-300"
-              >
-                Get In Touch
-              </motion.a>
             </motion.div>
 
             {/* Social Links */}
@@ -172,6 +152,7 @@ export default function Hero() {
               {[
                 { icon: Github, href: 'https://github.com/cdandeniya' },
                 { icon: Linkedin, href: 'https://www.linkedin.com/in/cdandeniya/' },
+                { icon: Twitter, href: 'https://x.com/cdandeniya7' },
                 { icon: Mail, href: 'mailto:cdandeniya1@gmail.com' },
               ].map(({ icon: Icon, href }, idx) => (
                 <motion.a
