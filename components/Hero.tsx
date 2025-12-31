@@ -6,6 +6,7 @@ import { useRef } from 'react'
 
 export default function Hero() {
   const containerRef = useRef<HTMLDivElement>(null)
+  const nameRef = useRef<HTMLSpanElement>(null)
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"]
@@ -13,6 +14,9 @@ export default function Hero() {
   
   const y = useTransform(scrollYProgress, [0, 1], [0, -100])
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0])
+  
+  // Shine effect based on scroll
+  const shinePosition = useTransform(scrollYProgress, [0, 1], ['-100%', '200%'])
 
   const scrollToAbout = () => {
     document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })
@@ -107,7 +111,26 @@ export default function Hero() {
             >
               Hi, my name is{' '}
               <br />
-              <span className="gradient-text">Chanul Dandeniya</span>
+              <span 
+                ref={nameRef}
+                className="relative inline-block"
+              >
+                <span className="gradient-text">Chanul Dandeniya</span>
+                <motion.span
+                  className="absolute inset-0 pointer-events-none"
+                  style={{
+                    background: `linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.6) 45%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,0.6) 55%, transparent 100%)`,
+                    backgroundSize: '60% 100%',
+                    backgroundPosition: shinePosition,
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text',
+                    mixBlendMode: 'screen',
+                  }}
+                >
+                  Chanul Dandeniya
+                </motion.span>
+              </span>
             </motion.h1>
 
             {/* Description */}
@@ -118,7 +141,7 @@ export default function Hero() {
               }}
               className="text-lg md:text-xl lg:text-2xl font-light text-black/60 mb-10 studio-text max-w-2xl mx-auto lg:mx-0 leading-relaxed"
             >
-              Tap on each section to learn more about my personal achievements, interests, professional experiences, academic pursuits, and unique contributions to the tech community.
+              Scroll down to explore my work, experience, and projects.
             </motion.p>
 
             {/* CTA Buttons */}

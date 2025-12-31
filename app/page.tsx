@@ -43,9 +43,11 @@ export default function Home() {
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="mb-8"
+            className="mb-8 text-center"
           >
-            <span className="text-4xl md:text-5xl font-extrabold text-black select-none">Loading Portfolio</span>
+            <h1 className="text-2xl md:text-3xl font-light text-black/50 select-none tracking-wide">
+              Loading Portfolio
+            </h1>
           </motion.div>
           <motion.div
             initial={{ scaleX: 0, opacity: 0 }}
