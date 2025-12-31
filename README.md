@@ -2,8 +2,6 @@
 
 My personal website, built with Next.js and hosted with Vercel.
 
-Previous versions: v1
-
 hero
 
 ## 🚀 Installing
@@ -27,9 +25,8 @@ npm run build
 npm start
 ```
 
-Open the source code and start editing!
 
-The site is now running at http://localhost:3000!
+The site is now running at https://cdandeniya.vercel.app/
 
 ## 🧐 What's inside?
 
