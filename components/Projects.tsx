@@ -13,7 +13,7 @@ const projects = [
     ],
     technologies: ['Rust', 'TypeScript', 'Svelte', 'P2P Networking', 'DHT'],
     github: 'https://github.com/cdandeniya',
-    website: 'https://chiral-network.vercel.app',
+    website: 'https://deploy-preview-1--chiral-network.netlify.app/',
     color: 'sky'
   },
   {
