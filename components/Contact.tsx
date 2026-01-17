@@ -2,8 +2,9 @@
 
 import { motion } from 'framer-motion'
 import { Mail, MapPin, FileText, ArrowRight, Github, Linkedin, Twitter } from 'lucide-react'
+import { memo } from 'react'
 
-export default function Contact() {
+function Contact() {
   const currentYear = new Date().getFullYear()
 
   return (
@@ -159,3 +160,5 @@ export default function Contact() {
     </section>
   )
 }
+
+export default memo(Contact)

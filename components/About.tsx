@@ -1,8 +1,9 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import { memo } from 'react'
 
-export default function About() {
+function About() {
   return (
     <section id="about" className="section-padding bg-white relative">
       <div className="container-studio">
@@ -82,3 +83,5 @@ export default function About() {
     </section>
   )
 }
+
+export default memo(About)

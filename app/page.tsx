@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Hero from '@/components/Hero'
 import About from '@/components/About'
 import Experience from '@/components/Experience'
@@ -13,19 +13,32 @@ import Cursor from '@/components/Cursor'
 export default function Home() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const [isLoading, setIsLoading] = useState(true)
+  const rafRef = useRef<number | null>(null)
+  const mouseRef = useRef({ x: 0, y: 0 })
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY })
+      mouseRef.current = { x: e.clientX, y: e.clientY }
+      
+      // Use requestAnimationFrame to throttle updates
+      if (rafRef.current === null) {
+        rafRef.current = requestAnimationFrame(() => {
+          setMousePosition({ x: mouseRef.current.x, y: mouseRef.current.y })
+          rafRef.current = null
+        })
+      }
     }
 
-    window.addEventListener('mousemove', handleMouseMove)
+    window.addEventListener('mousemove', handleMouseMove, { passive: true })
     
     // Simulate loading
     const timer = setTimeout(() => setIsLoading(false), 2500)
     
     return () => {
       window.removeEventListener('mousemove', handleMouseMove)
+      if (rafRef.current !== null) {
+        cancelAnimationFrame(rafRef.current)
+      }
       clearTimeout(timer)
     }
   }, [])

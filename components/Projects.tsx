@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { Github, ExternalLink } from 'lucide-react'
+import { memo } from 'react'
 
 const projects = [
   {
@@ -63,7 +64,7 @@ const projects = [
   }
 ]
 
-export default function Projects() {
+function Projects() {
   return (
     <section id="projects" className="section-padding bg-white relative">
       <div className="container-studio">
@@ -372,3 +373,5 @@ export default function Projects() {
     </section>
   )
 }
+
+export default memo(Projects)

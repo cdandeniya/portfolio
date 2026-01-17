@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback, memo } from 'react'
 import { motion } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
 
@@ -12,36 +12,49 @@ const navItems = [
   { name: 'Contact', href: '#contact' },
 ]
 
-export default function Navigation() {
+function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('home')
 
   useEffect(() => {
+    let rafId: number | null = null
+    
     const handleScroll = () => {
-      const sections = navItems.map(item => item.name.toLowerCase())
-      const scrollPosition = window.scrollY + 100
-      for (const section of sections) {
-        const element = document.getElementById(section)
-        if (element) {
-          const { offsetTop, offsetHeight } = element
-          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
-            setActiveSection(section)
-            break
+      if (rafId === null) {
+        rafId = requestAnimationFrame(() => {
+          const sections = navItems.map(item => item.name.toLowerCase())
+          const scrollPosition = window.scrollY + 100
+          for (const section of sections) {
+            const element = document.getElementById(section)
+            if (element) {
+              const { offsetTop, offsetHeight } = element
+              if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+                setActiveSection(section)
+                break
+              }
+            }
           }
-        }
+          rafId = null
+        })
       }
     }
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
+    
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      if (rafId !== null) {
+        cancelAnimationFrame(rafId)
+      }
+    }
   }, [])
 
-  const scrollToSection = (href: string) => {
+  const scrollToSection = useCallback((href: string) => {
     const element = document.querySelector(href)
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' })
     }
     setIsOpen(false)
-  }
+  }, [])
 
   return (
     <motion.nav
@@ -147,4 +160,6 @@ export default function Navigation() {
       </div>
     </motion.nav>
   )
-} 
+}
+
+export default memo(Navigation) 

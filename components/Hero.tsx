@@ -2,9 +2,10 @@
 
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { ArrowDown, Github, Linkedin, Mail, Twitter } from 'lucide-react'
-import { useRef } from 'react'
+import { useRef, useCallback } from 'react'
+import Image from 'next/image'
 
-export default function Hero() {
+function Hero() {
   const containerRef = useRef<HTMLDivElement>(null)
   const nameRef = useRef<HTMLSpanElement>(null)
   const { scrollYProgress } = useScroll({
@@ -18,9 +19,9 @@ export default function Hero() {
   // Shine effect based on scroll
   const shinePosition = useTransform(scrollYProgress, [0, 1], ['-100%', '200%'])
 
-  const scrollToAbout = () => {
+  const scrollToAbout = useCallback(() => {
     document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })
-  }
+  }, [])
 
   return (
     <section 
@@ -34,7 +35,7 @@ export default function Hero() {
         style={{ y }}
       />
       
-      {/* Floating gradient orbs */}
+      {/* Floating gradient orbs - optimized with will-change */}
       <motion.div
         className="absolute top-20 left-10 w-72 h-72 bg-sky-200/30 rounded-full blur-3xl"
         animate={{
@@ -47,6 +48,7 @@ export default function Hero() {
           repeat: Infinity,
           ease: "easeInOut"
         }}
+        style={{ willChange: 'transform' }}
       />
       <motion.div
         className="absolute bottom-20 right-10 w-96 h-96 bg-yellow-200/20 rounded-full blur-3xl"
@@ -60,6 +62,7 @@ export default function Hero() {
           repeat: Infinity,
           ease: "easeInOut"
         }}
+        style={{ willChange: 'transform' }}
       />
 
       <div className="relative container-studio py-20 md:py-32 z-10">
@@ -85,10 +88,14 @@ export default function Hero() {
               whileHover={{ scale: 1.02 }}
               transition={{ duration: 0.5 }}
             >
-              <img
+              <Image
                 src="/profile-photo.jpg"
                 alt="Chanul Dandeniya"
+                width={384}
+                height={512}
                 className="w-full h-full object-cover"
+                priority
+                quality={90}
               />
             </motion.div>
           </motion.div>
@@ -220,3 +227,5 @@ export default function Hero() {
     </section>
   )
 }
+
+export default Hero

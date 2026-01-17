@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { ExternalLink } from 'lucide-react'
+import { memo } from 'react'
 
 const experiences = [
   {
@@ -70,7 +71,7 @@ const experiences = [
   }
 ]
 
-export default function Experience() {
+function Experience() {
   return (
     <section id="experience" className="section-padding bg-white relative">
       <div className="container-studio">
@@ -189,3 +190,5 @@ export default function Experience() {
     </section>
   )
 }
+
+export default memo(Experience)
