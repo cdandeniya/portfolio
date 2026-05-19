@@ -1,95 +1,45 @@
 'use client'
 
-import { motion } from 'framer-motion'
-import { useState, useEffect, useRef } from 'react'
+import { useState, useCallback } from 'react'
+import dynamic from 'next/dynamic'
 import Hero from '@/components/Hero'
 import About from '@/components/About'
 import Experience from '@/components/Experience'
 import Projects from '@/components/Projects'
 import Contact from '@/components/Contact'
 import Navigation from '@/components/Navigation'
-import Cursor from '@/components/Cursor'
+import Preloader from '@/components/effects/Preloader'
+
+const PaintedCanvas = dynamic(() => import('@/components/effects/PaintedCanvas'), {
+  ssr: false,
+})
+const SmoothScroll = dynamic(() => import('@/components/effects/SmoothScroll'), {
+  ssr: false,
+})
+const CustomCursor = dynamic(() => import('@/components/effects/CustomCursor'), {
+  ssr: false,
+})
 
 export default function Home() {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
-  const [isLoading, setIsLoading] = useState(true)
-  const rafRef = useRef<number | null>(null)
-  const mouseRef = useRef({ x: 0, y: 0 })
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      mouseRef.current = { x: e.clientX, y: e.clientY }
-      
-      // Use requestAnimationFrame to throttle updates
-      if (rafRef.current === null) {
-        rafRef.current = requestAnimationFrame(() => {
-          setMousePosition({ x: mouseRef.current.x, y: mouseRef.current.y })
-          rafRef.current = null
-        })
-      }
-    }
-
-    window.addEventListener('mousemove', handleMouseMove, { passive: true })
-    
-    // Simulate loading
-    const timer = setTimeout(() => setIsLoading(false), 2500)
-    
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove)
-      if (rafRef.current !== null) {
-        cancelAnimationFrame(rafRef.current)
-      }
-      clearTimeout(timer)
-    }
-  }, [])
-
-  if (isLoading) {
-    return (
-      <div className="fixed inset-0 gradient-bg flex items-center justify-center z-50">
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="flex flex-col items-center"
-        >
-          <motion.div
-            initial={{ scale: 0.9, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="mb-8 text-center"
-          >
-            <h1 className="text-2xl md:text-3xl font-light text-black/50 select-none tracking-wide">
-              Loading Portfolio
-            </h1>
-          </motion.div>
-          <motion.div
-            initial={{ scaleX: 0, opacity: 0 }}
-            animate={{ scaleX: 1, opacity: 1 }}
-            transition={{ duration: 2, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-            className="h-1 w-[80vw] max-w-4xl bg-gradient-to-r from-sky-400 via-blue-500 to-yellow-400 mb-4 origin-center"
-            style={{ transformOrigin: 'center' }}
-          />
-        </motion.div>
-      </div>
-    )
-  }
+  const [ready, setReady] = useState(false)
+  const onLoaded = useCallback(() => setReady(true), [])
 
   return (
-    <main className="min-h-screen relative">
-      <Cursor mousePosition={mousePosition} />
-      <Navigation />
-      
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-      >
-        <Hero />
-        <About />
-        <Experience />
-        <Projects />
-        <Contact />
-      </motion.div>
-    </main>
+    <>
+      {!ready && <Preloader onDone={onLoaded} />}
+      <SmoothScroll>
+        <PaintedCanvas />
+        <div className="grain" aria-hidden />
+        <CustomCursor />
+        <Navigation />
+        <main className={ready ? 'opacity-100' : 'opacity-0'} style={{ transition: 'opacity 0.6s ease' }}>
+          <Hero />
+          <About />
+          <Experience />
+          <Projects />
+          <Contact />
+        </main>
+      </SmoothScroll>
+    </>
   )
-} 
+}

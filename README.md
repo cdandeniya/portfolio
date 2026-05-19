@@ -2,8 +2,6 @@
 
 My personal website, built with Next.js and hosted with Vercel.
 
-hero
-
 ## 🚀 Installing
 
 Install dependencies
